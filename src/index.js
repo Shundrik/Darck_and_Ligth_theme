@@ -1,32 +1,52 @@
 import { arrayMenu } from './menu.js';
 
-const STORAGE_KEY = "themeKey";
 
 const Theme = {
   LIGHT: 'light-theme',
   DARK: 'dark-theme',
 };
-// function checkTheme() {
-// let isTheme = localStorage.getItem(STORAGE_KEY);
-// if (isTheme) {
-//   isTheme = JSON.parse(isTheme);
-  
-// }
-// }
+
+const STORAGE_KEY = 'themeKey';
 
 const checkBox = document.querySelector('.theme-switch__toggle');
 const body = document.querySelector('body');
-checkBox.addEventListener('change', onChange);
 
-function onChange() {
-  body.classList.toggle('dark-theme');
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(Theme.LIGTH));
-  if (body.classList.contains('dark-theme')) {
-     localStorage.setItem(STORAGE_KEY, JSON.stringify(Theme.DARK));
+checkBox.addEventListener('change', onChange);
+isTheme();
+
+function onChange(e) {
+  // console.log(e.target.checked);
+  if (e.target.checked) {
+    body.classList.remove('ligth-theme');
+body.classList.add('dark-theme');
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(Theme.DARK));
+
+  } else {
+      body.classList.remove('dark-theme');
+  body.classList.add('ligth-theme');
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(Theme.LIGHT))
   }
-   
- 
+
+  
 }
+
+function isTheme() {
+  const saveTheme = localStorage.getItem(STORAGE_KEY);
+  if (!saveTheme) {
+      body.classList.add('ligth-theme')
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(Theme.LIGHT));
+  } else {
+    const parseTheme = JSON.parse(saveTheme);
+    if (parseTheme === 'dark-theme') {
+      body.classList.add('dark-theme');
+      checkBox.checked = true;
+    
+    }
+  }
+
+}
+
+
 
 function createMenu(arrayMenu) {
  return arrayMenu
@@ -69,4 +89,4 @@ function createMenu(arrayMenu) {
     
 const markupMenu = createMenu(arrayMenu);
 const menuEl = document.querySelector('ul');
-menuEl.insertAdjacentHTML('beforeend', markupMenu);
+  menuEl.insertAdjacentHTML('beforeend', markupMenu);
