@@ -15,7 +15,7 @@ checkBox.addEventListener('change', onChange);
 isTheme();
 
 function onChange(e) {
-  // console.log(e.target.checked);
+
   if (e.target.checked) {
     body.classList.remove('ligth-theme');
 body.classList.add('dark-theme');
