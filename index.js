@@ -46,8 +46,6 @@ function isTheme() {
 
 }
 
-
-
 function createMenu(arrayMenu) {
  return arrayMenu
     .map(
